@@ -1,0 +1,176 @@
+/* General Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles: Overall Page Settings */
+body {
+    background-color: #0f0e17; /* Page background color */
+    font-family: "Roboto Mono", monospace; /* Default font family */
+    color: #ffffff; /* White text color */
+    margin: 24px; /* Margin around body content */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center align sections horizontally */
+    text-align: center; /* Center align all text */
+    min-height: 100vh; /* Ensure page fills the viewport */
+}
+
+/* Section Wrapper */
+section, footer {
+    width: 100%;
+    max-width: 1280px; /* Restrict content width */
+    margin: 0 auto; /* Center sections horizontally */
+    padding: 40px 16px; /* Padding inside each section */
+}
+
+/* Spacing Between Sections */
+section + section, section + footer {
+    margin-top: 80px; /* Add 80px spacing between consecutive sections */
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    gap: 16px; /* Equal spacing between elements */
+    min-height: 500px; /* Provide sufficient height */
+    padding: 40px 16px; /* Padding for the section */
+}
+
+.small-text {
+    font-size: 24px;
+    color: #ff8906;
+}
+
+.hero-headline {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fffffe;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    color: #a7a9be;
+}
+
+.cta-button {
+    font-size: 24px;
+    background-color: #ff8906;
+    color: #fffffe;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin-top: 16px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #e07b00;
+}
+
+/* About Section */
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+
+.about-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fffffe;
+}
+
+.about-description {
+    font-size: 24px;
+    color: #a7a9be;
+    line-height: 1.5;
+}
+
+/* Projects Section */
+.projects-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 16px;
+}
+
+.projects-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fffffe;
+    margin-bottom: 16px;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px; /* Space between cards */
+    flex-wrap: wrap; /* Wrap cards on smaller screens */
+    width: 100%;
+}
+
+.project-card {
+    background-color: #000000;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 300px; /* Fixed width for cards */
+    height: 250px; /* Fixed height for equal cards */
+}
+
+.project-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fffffe;
+    margin-bottom: 8px;
+}
+
+.project-description {
+    font-size: 18px;
+    color: #a7a9be;
+    margin-bottom: 16px;
+}
+
+.project-button {
+    font-size: 18px;
+    color: #fffffe;
+    background-color: #ff8906;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.project-button:hover {
+    background-color: #e07b00;
+}
+
+/* Footer Section */
+.footer-section {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 40px 16px; /* Padding for spacing */
+    text-align: center; /* Center align text */
+}
+
+.footer-text {
+    font-size: 24px; /* Font size */
+    color: #ff8906; /* Orange color for text */
+    margin: 0; /* Remove default margin */
+}
