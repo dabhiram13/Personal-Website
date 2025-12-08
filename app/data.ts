@@ -69,6 +69,16 @@ export const PROJECTS: Project[] = [
     id: 'project1',
     type : 'image'
   },
+  {
+    name: 'Retro-Dither',
+    github: 'https://github.com/dabhiram13/retro-dither',
+    description:
+      'Ditherify your images into 90s retro style',
+    link: 'https://retro-dither.vercel.app/',
+    video: '/Custom recording 2025-12-08 00-33-18.mp4',
+    id: 'project2',
+    type: 'video'
+  },
 ]
 
 export const DESIGNS: Design[] = [

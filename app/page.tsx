@@ -25,7 +25,7 @@ import IosShareIcon from '@mui/icons-material/IosShare';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Modals } from '@/components/ui/five'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
@@ -55,9 +55,11 @@ type ProjectVideoProps = {
 function ProjectVideo({ src }: any) {
   const [isLoading, setIsLoading] = useState(true)
   const [isVideoReady, setIsVideoReady] = useState(false)
+  const previewVideoRef = useRef<HTMLVideoElement>(null)
+  const modalVideoRef = useRef<HTMLVideoElement>(null)
+  const playbackSpeed = 1.0 // Set playback speed (1.0x = normal speed)
   
   useEffect(() => {
-
     const minLoadingTimeout = setTimeout(() => {
       if (isVideoReady) {
         setIsLoading(false)
@@ -66,6 +68,17 @@ function ProjectVideo({ src }: any) {
 
     return () => clearTimeout(minLoadingTimeout)
   }, [isVideoReady])
+
+  useEffect(() => {
+    // Set playback speed for preview video
+    if (previewVideoRef.current) {
+      previewVideoRef.current.playbackRate = playbackSpeed
+    }
+    // Set playback speed for modal video
+    if (modalVideoRef.current) {
+      modalVideoRef.current.playbackRate = playbackSpeed
+    }
+  }, [playbackSpeed, isVideoReady])
 
   return (
     <MorphingDialog
@@ -95,11 +108,18 @@ function ProjectVideo({ src }: any) {
             transition={{ duration: 0.4 }}
           >
             <video
+              ref={previewVideoRef}
               src={src}
               autoPlay
               loop
               muted
-              onLoadedData={() => setIsVideoReady(true)}
+              onLoadedData={(e) => {
+                setIsVideoReady(true)
+                e.currentTarget.playbackRate = playbackSpeed
+              }}
+              onPlay={(e) => {
+                e.currentTarget.playbackRate = playbackSpeed
+              }}
               className="aspect-video w-full cursor-zoom-in rounded-xl"
             />
           </motion.div>
@@ -108,10 +128,17 @@ function ProjectVideo({ src }: any) {
       <MorphingDialogContainer>
         <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
           <video
+            ref={modalVideoRef}
             src={src}
             autoPlay
             loop
             muted
+            onLoadedData={(e) => {
+              e.currentTarget.playbackRate = playbackSpeed
+            }}
+            onPlay={(e) => {
+              e.currentTarget.playbackRate = playbackSpeed
+            }}
             className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
           />
         </MorphingDialogContent>
