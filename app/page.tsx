@@ -55,9 +55,16 @@ type ProjectVideoProps = {
 function ProjectVideo({ src }: any) {
   const [isLoading, setIsLoading] = useState(true)
   const [isVideoReady, setIsVideoReady] = useState(false)
+  const [playbackRate, setPlaybackRate] = useState(1.0)
   const previewVideoRef = useRef<HTMLVideoElement>(null)
   const modalVideoRef = useRef<HTMLVideoElement>(null)
-  const playbackSpeed = 1.0 // Set playback speed (1.0x = normal speed)
+  const targetDuration = 10 // Target duration in seconds
+  
+  const calculatePlaybackRate = (duration: number) => {
+    // Calculate playback rate to complete video in targetDuration seconds
+    // Formula: playbackRate = videoDuration / targetDuration
+    return duration / targetDuration
+  }
   
   useEffect(() => {
     const minLoadingTimeout = setTimeout(() => {
@@ -72,13 +79,13 @@ function ProjectVideo({ src }: any) {
   useEffect(() => {
     // Set playback speed for preview video
     if (previewVideoRef.current) {
-      previewVideoRef.current.playbackRate = playbackSpeed
+      previewVideoRef.current.playbackRate = playbackRate
     }
     // Set playback speed for modal video
     if (modalVideoRef.current) {
-      modalVideoRef.current.playbackRate = playbackSpeed
+      modalVideoRef.current.playbackRate = playbackRate
     }
-  }, [playbackSpeed, isVideoReady])
+  }, [playbackRate, isVideoReady])
 
   return (
     <MorphingDialog
@@ -113,12 +120,17 @@ function ProjectVideo({ src }: any) {
               autoPlay
               loop
               muted
+              onLoadedMetadata={(e) => {
+                const duration = e.currentTarget.duration
+                const calculatedRate = calculatePlaybackRate(duration)
+                setPlaybackRate(calculatedRate)
+              }}
               onLoadedData={(e) => {
                 setIsVideoReady(true)
-                e.currentTarget.playbackRate = playbackSpeed
+                e.currentTarget.playbackRate = playbackRate
               }}
               onPlay={(e) => {
-                e.currentTarget.playbackRate = playbackSpeed
+                e.currentTarget.playbackRate = playbackRate
               }}
               className="aspect-video w-full cursor-zoom-in rounded-xl"
             />
@@ -133,11 +145,16 @@ function ProjectVideo({ src }: any) {
             autoPlay
             loop
             muted
+            onLoadedMetadata={(e) => {
+              const duration = e.currentTarget.duration
+              const calculatedRate = calculatePlaybackRate(duration)
+              setPlaybackRate(calculatedRate)
+            }}
             onLoadedData={(e) => {
-              e.currentTarget.playbackRate = playbackSpeed
+              e.currentTarget.playbackRate = playbackRate
             }}
             onPlay={(e) => {
-              e.currentTarget.playbackRate = playbackSpeed
+              e.currentTarget.playbackRate = playbackRate
             }}
             className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
           />
