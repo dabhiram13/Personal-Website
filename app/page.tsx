@@ -570,7 +570,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Turning scrappy experiments into lean, revenue‑first SaaS. Links to all my socials below.
+            Building products and learning new things. Links to all my socials below.
           </p>
         </div>
       </motion.section>
